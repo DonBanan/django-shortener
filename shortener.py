@@ -10,10 +10,10 @@ def get_short_url(length):
     return ''.join(random.choice(dictionary) for _ in range(length))
 
 
-def create(post_one):
+def create(object):
     length_url = settings.SHORTEN_LENGTH_URL
-    if ShortUrl.objects.filter(original_url__exact=post_one.get_absolute_url()).exists():
-        return ShortUrl.objects.get(original_url=post_one.get_absolute_url())
-    ShortUrl.objects.create(original_url=post_one.get_absolute_url(),
+    if ShortUrl.objects.filter(original_url__exact=object.get_absolute_url()).exists():
+        return ShortUrl.objects.get(original_url=object.get_absolute_url())
+    ShortUrl.objects.create(original_url=object.get_absolute_url(),
                             short_url=get_short_url(length_url),
-                            content_object=post_one)
+                            content_object=object)
